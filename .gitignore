@@ -52,3 +52,8 @@ CGH_QtWidget_Calculator/x64/Release/qmake/temp/qtvars.pro
 CGH_QtWidget_Calculator/x64/Release/qmake/temp/qtvars_x64_Release.props
 CGH_QtWidget_Calculator/x64/Release/rcc/qrc_CGH_QtWidget_Calculator.cpp
 CGH_QtWidget_Calculator/x64/Release/uic/ui_CGH_QtWidget_Calculator.h
+*.ipch
+*.log
+CGH_QtWidget_Calculator/enc_temp_folder/b9e5f634885a2375d76aadb0f4b1f193/CGH_QtWidget_Calculator.cpp
+CGH_QtWidget_Calculator/x64/Debug/vc140.pdb
+CGH_QtWidget_Calculator/x64/Debug/CGH_QtWi.FB89A469.tlog/CL.write.1.tlog
