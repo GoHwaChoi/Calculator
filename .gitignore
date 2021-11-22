@@ -1,4 +1,4 @@
-./.vs/
-./x64/
 *.ipch
 *.log
+CGH_QtWidget_Calculator/.vs/
+CGH_QtWidget_Calculator/x64/
