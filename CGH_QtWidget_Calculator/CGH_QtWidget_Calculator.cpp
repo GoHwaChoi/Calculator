@@ -31,7 +31,7 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
     //ºÎ°¡±â´É ¹öÆ° ÀÔ·Â
     connect(ui.pushButton_result, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_result);
     connect(ui.pushButton_clearExpr, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearExpr);
-    connect(ui.pushButton_resetCalc, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_resetCalc);
+    connect(ui.pushButton_clearCalc, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearCalc);
     connect(ui.pushButton_backspace, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspace);
     connect(ui.pushButton_selectNegOrPos, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_selectNegOrPos);
 
@@ -63,6 +63,7 @@ void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ
     }
 
 }
+
 void CGH_QtWidget_Calculator::on_Button_backspace()     //¸¶Áö¸· ÅØ½ºÆ® Áö¿ì±â(backspace)
 {
     auto strPrev = ui.lineEdit_num->text();
@@ -71,58 +72,78 @@ void CGH_QtWidget_Calculator::on_Button_backspace()     //¸¶Áö¸· ÅØ½ºÆ® Áö¿ì±â(b
     ui.lineEdit_num->setText(QString::fromStdString(strModi));
 }
 
-void CGH_QtWidget_Calculator::on_Button_clearExpr()     //ÀÔ·ÂµÈ ÇÇ¿¬»êÀÚ ¹®ÀÚ¿­ »èÁ¦
+void CGH_QtWidget_Calculator::on_Button_clearExpr()     //ÀÔ·ÂµÈ °è»ê½Ä ¹®ÀÚ¿­ »èÁ¦(¹Ì±¸Çö)
 {
-    ui.lineEdit_num->setText("");
+    //ui.lineEdit_num->setText("");
 }
 
-void CGH_QtWidget_Calculator::on_Button_resetCalc()     //ÀÔ·ÂµÈ °è»ê½Ä ¹× ÇÇ¿¬»êÀÚ ¹®ÀÚ¿­ »èÁ¦
+void CGH_QtWidget_Calculator::on_Button_clearCalc()     //ÀÔ·ÂµÈ °è»ê½Ä ¹× ÇÇ¿¬»êÀÚ ¹®ÀÚ¿­ »èÁ¦(¸¶Áö¸·À¸·Î ÀÔ·ÂµÈ ¼ýÀÚ)
 {
     ui.lineEdit_num->setText("");
     ui.lineEdit_expr->setText("");
 }
 
-void CGH_QtWidget_Calculator::setCalcData_followingWinApp(QString str)          //±¸ÇöÁß : ¿¬»êÀÚ ÀÔ·Â ½Ã »ó´Ü °è»ê½Ä¿¡¸¸ Ãß°¡. ÇÏ´ÜÀº ÇÇ¿¬»êÀÚ¸¸ ÀÔ·Â
-{
-    //return;
-    auto strPrev = ui.lineEdit_expr->text();
-    int strNum = std::stoi(str.toStdString());
-    QString strLine_num;
-    QString strLine_expr;
+void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //¼ýÀÚ ¹öÆ° ÀÔ·Â ½Ã °è»ê½Ä ¹× ¼ýÀÚ ¹®ÀÚ¿­ Ãâ·Â
+{   
+    auto strPrev = ui.lineEdit_num->text();             //¼ýÀÚ ¹®ÀÚ¿­ÀÇ Ãâ·Â ´©Àû°ª °¡Á®¿È
 
-    if (0 <= strNum && strNum <= 9)
+    if (strNum == "+" || strNum == "-" || strNum == "*" || strNum == "/")       //¿¬»êÀÚ ÀÔ·Â ½Ã »ó´Ü À§Á¬¿¡¸¸ Ãâ·Â
     {
-        strLine_num = strPrev + str;
-        ui.lineEdit_num->setText(strLine_num);
+        auto strExpr = ui.lineEdit_expr->text();        //±âÁ¸ ¼ö½Ä °¡Á®¿À±â
+
+        strExpr += strPrev + strNum;                    //ÀÔ·ÂÇÑ ÇÇ¿¬»êÀÚ¿Í ¿¬»êÀÚ¸¦ °è»ê½Ä¿¡ Ãß°¡
+
+        ui.lineEdit_expr->setText(strExpr);             //°è»ê½Ä ´©ÀûÇÏ¿© lineEditÀ§Á¬¿¡ Ãâ·Â
+        ui.lineEdit_num->setText("");                   //¼ýÀÚ ÀÔ·ÂÃ¢¿¡ ´ÙÀ½ ¼ýÀÚ°¡ ÀÔ·ÂµÇµµ·Ï ¹®ÀÚ¿­ ÃÊ±âÈ­
+        strPrev.clear();                                //ÀÔ·ÂÃ¢ÀÇ ¹®ÀÚ¿­ ÃÊ±âÈ­
     }
+    else
+    {                                                   
+        auto strExpr = ui.lineEdit_expr->text();        //°è»ê½Ä Ãâ·ÂÃ¢ ¹®ÀÚ¿­ °¡Á®¿È
+        auto checkEndExpr = strExpr.right(1);           //°è»ê½Ä ¸¶Áö¸· ¹®ÀÚ ÃßÃâ
+        if (checkEndExpr == "=")                        //°è»ê ¿Ï·á. °á°ú°ª ¿¬»ê Ãâ·ÂµÈ ÀÌÈÄ
+        {
+			ui.lineEdit_expr->setText("");              //°è»ê½Ä Ãâ·ÂÃ¢ ÃÊ±âÈ­
+            strPrev.clear();                            //±âÁ¸ °è»ê½Ä ÀúÀåµÈ °ª »èÁ¦
 
-    strLine_expr = strPrev + str;
+			strPrev += strNum;                          //»õ·Î ÀÔ·ÂµÈ ¼ýÀÚ ÀúÀå
+                    
+			ui.lineEdit_num->setText(strPrev);          //»õ·Î ÀÔ·ÂµÈ ¼ýÀÚ Ãâ·Â
+            checkEndExpr.clear();                       //½Å±Ô °è»ê ÃÊ±âÈ­ µ¿ÀÛ ¿Ï·á ÈÄ º¯¼ö ÃÊ±âÈ­
+            strExpr.clear();
+        }
+        else
+        {
+			strPrev += strNum;                          //°è»ê½Ä ÀÔ·Â°ª ´©ÀûÇÏ¿© ÀúÀå
 
-    ui.lineEdit_expr->setText(strLine_expr);
+			ui.lineEdit_num->setText(strPrev);          //´©ÀûµÈ °è»ê½Ä Ãâ·Â
+        }
+            
+    }
 }
-
-void CGH_QtWidget_Calculator::setCalcData(QString str)          //¹öÆ°À¸·Î ÀÔ·ÂµÈ ³»¿ë Ãâ·Â(°è»ê½Ä)
-{
-    auto strPrev = ui.lineEdit_num->text();
-  
-    strPrev += str;
-
-    ui.lineEdit_num->setText(strPrev);
-    ui.lineEdit_expr->setText(strPrev);
-}
-
 
 void CGH_QtWidget_Calculator::on_Button_result()                //°è»ê½Ä °á°ú°ª ¿¬»ê ¹öÆ° ½½·Ô
 {
-    auto strExpr = ui.lineEdit_num->text();
-    if (strExpr != NULL)
+    auto strExpr = ui.lineEdit_expr->text();
+    auto strLast = ui.lineEdit_num->text();
+
+    if (! strExpr.isEmpty())                                    //°è»ê½ÄÀÌ ÀÔ·Â ÁßÀÏ ¶§, 
     {
-        auto stdExpr = strExpr.toStdString();
+		auto stdExpr = strExpr.toStdString();
+        auto stdLast = strLast.toStdString();
+        stdExpr += stdLast;
+
         auto nResult = calculator::eval(stdExpr);
+
+        auto strExpr = QString::fromStdString(stdExpr);
+
+        strExpr += " =";
+
         ui.lineEdit_num->setText(QString::number(nResult));
+        ui.lineEdit_expr->setText(strExpr);
     }
     else
-    {
+    {                                                           //°è»ê ¿Ï·á ÈÄ
         QMessageBox::warning(this, "Error Expression!", "There is no exist data of expression. Input the Expression!");
     }
     
@@ -133,38 +154,47 @@ void CGH_QtWidget_Calculator::on_Button_0()
 {
     setCalcData("0");
 }
+
 void CGH_QtWidget_Calculator::on_Button_1()
 {
     setCalcData("1");
 }
+
 void CGH_QtWidget_Calculator::on_Button_2()
 {
     setCalcData("2");
 }
+
 void CGH_QtWidget_Calculator::on_Button_3()
 {
     setCalcData("3");
 }
+
 void CGH_QtWidget_Calculator::on_Button_4()
 {
     setCalcData("4");
 }
+
 void CGH_QtWidget_Calculator::on_Button_5()
 {
     setCalcData("5");
 }
+
 void CGH_QtWidget_Calculator::on_Button_6()
 {
     setCalcData("6");
 }
+
 void CGH_QtWidget_Calculator::on_Button_7()
 {
     setCalcData("7");
 }
+
 void CGH_QtWidget_Calculator::on_Button_8()
 {
     setCalcData("8");
 }
+
 void CGH_QtWidget_Calculator::on_Button_9()
 {
     setCalcData("9");
@@ -175,14 +205,17 @@ void CGH_QtWidget_Calculator::on_Button_plus()
 {
     setCalcData("+");
 }
+
 void CGH_QtWidget_Calculator::on_Button_minus()
 {
     setCalcData("-");
 }
+
 void CGH_QtWidget_Calculator::on_Button_multiple()
 {
     setCalcData("*");
 }
+
 void CGH_QtWidget_Calculator::on_Button_divide()
 {
     setCalcData("/");
