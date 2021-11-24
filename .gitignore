@@ -1,4 +1,7 @@
 *.ipch
 *.log
-CGH_QtWidget_Calculator/.vs/
-CGH_QtWidget_Calculator/x64/
+../Intermediate/
+./Intermediate/
+./x64/
+
+
