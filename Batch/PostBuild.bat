@@ -12,5 +12,5 @@ set Config=Debug
 :RELEASE
 set Config=Release
 
-echo %2\bin\windeployqt.exe .\x64\%Config%\
-%2\bin\windeployqt.exe .\x64\%Config%\
+%2\bin\windeployqt.exe ..\Bin\%Config%\
+%2\bin\windeployqt.exe ..\Bin\%Config%\
