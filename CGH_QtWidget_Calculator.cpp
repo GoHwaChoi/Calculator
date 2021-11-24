@@ -95,18 +95,31 @@ void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //숫자 버튼 �
         auto strExpr = ui.lineEdit_expr->text();        //상단 lineEdit위젯에서 계산식 가져옴
 
         /*--------------------------------------------------------------------
-          연산자가 입력되면
+          연산자가 입력되면 (하단 출력창이 비어있지 않는 경우)
             기존 계산식 + 입력된 숫자 + 연산자 를 모두 출력
         --------------------------------------------------------------------*/
         if (! strPrev.isEmpty())
         {
-			strExpr += strPrev + strNum;                    //기존 계산식에 숫자와 연산자 추가
+            auto strExprLast = strExpr.right(1);            //기존 계산식의 마지막 문자 저장
 
-			ui.lineEdit_expr->setText(strExpr);             //계산식 누적하여 lineEdit위젯에 출력
-			ui.lineEdit_num->setText("");                   //숫자 입력창에 다음 숫자가 입력되도록 문자열 초기화
+            if (strExprLast == "=")
+            {
+                strExpr = strPrev + strNum;                 //계산 결과값에 입력한 연산자를 추가하여 새로운 계산식을 이어감
+
+                ui.lineEdit_expr->setText(strExpr);         //신규 계산식 출력
+                ui.lineEdit_num->setText("");               //숫자 입력창에 다음 숫자가 입력되도록 문자열 초기화
+            }
+
+            else
+            {
+				strExpr += strPrev + strNum;                    //기존 계산식에 숫자와 연산자 추가
+
+				ui.lineEdit_expr->setText(strExpr);             //계산식 누적하여 lineEdit위젯에 출력
+				ui.lineEdit_num->setText("");                   //숫자 입력창에 다음 숫자가 입력되도록 문자열 초기화
+            }
         }
         /*--------------------------------------------------------------------
-		  연산자를 연속하여 2번이상 입력하는 경우
+		  연산자를 연속하여 2번이상 입력하는 경우 (하단 출력창이 비어있는 경우)
             기존 연산자를 삭제하고 입력된 연산자를 추가함
 		--------------------------------------------------------------------*/
         else
