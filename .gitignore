@@ -1,7 +1,12 @@
 *.ipch
 *.log
 ../Intermediate/
+Calculator/.vs/
 ./Intermediate/
-./x64/
+CGH_QtWidget_Calculator/x64/
+../Batch/
 
-
+Intermediate/CGH_QtWidget_Calculator/Debug/
+Intermediate/CGH_QtWidget_Calculator/Release/
+.vs/
+CGH_QtWidget_Calculator/Intermediate/
