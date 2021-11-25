@@ -36,8 +36,8 @@ public:
     void on_Button_divide();
 
     void on_Button_result();
-    void on_Button_clearExpr();
     void on_Button_clearCalc();
-    void on_Button_backspace();
+    void on_Button_backspaceNum();
+    void on_Button_backspaceExpr();
     void on_Button_selectNegOrPos();
 };

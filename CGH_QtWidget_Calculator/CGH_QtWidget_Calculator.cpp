@@ -32,12 +32,10 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
     
     //ºÎ°¡±â´É ¹öÆ° ÀÔ·Â
     connect(ui.pushButton_result, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_result);
-    connect(ui.pushButton_clearExpr, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearExpr);
     connect(ui.pushButton_clearCalc, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearCalc);
-    connect(ui.pushButton_backspace, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspace);
+    connect(ui.pushButton_backspaceNum, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceNum);
+    connect(ui.pushButton_backspaceExpr, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceExpr);
     connect(ui.pushButton_selectNegOrPos, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_selectNegOrPos);
-
-
 }
 
 void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ¯
@@ -64,17 +62,20 @@ void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ
     }
 }
 
-void CGH_QtWidget_Calculator::on_Button_backspace()     //¸¶Áö¸· ÅØ½ºÆ® Áö¿ì±â(backspace)
+void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ö½Ä ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceExpr)
 {
-    auto strPrev = ui.lineEdit_num->text();
-    auto stdPrev = strPrev.toStdString();
-    auto strModi = stdPrev.substr(0, stdPrev.length() - 1);
-    ui.lineEdit_num->setText(QString::fromStdString(strModi));
+    auto strExpr = ui.lineEdit_expr->text();
+    auto stdExpr = strExpr.toStdString();
+    auto strExprModi = stdExpr.substr(0, stdExpr.length() - 1);
+    ui.lineEdit_expr->setText(QString::fromStdString(strExprModi));
 }
 
-void CGH_QtWidget_Calculator::on_Button_clearExpr()     //ÀÔ·ÂµÈ ¼ö½Ä ¹®ÀÚ¿­ »èÁ¦(¹Ì±¸Çö)
+void CGH_QtWidget_Calculator::on_Button_backspaceNum()     //¼ıÀÚ ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceNum)
 {
-    //ui.lineEdit_num->setText("");
+	auto strPrev = ui.lineEdit_num->text();
+	auto stdPrev = strPrev.toStdString();
+	auto strPrevModi = stdPrev.substr(0, stdPrev.length() - 1);
+	ui.lineEdit_num->setText(QString::fromStdString(strPrevModi));
 }
 
 void CGH_QtWidget_Calculator::on_Button_clearCalc()     //ÀÔ·ÂµÈ ¼ö½Ä ¹× ÇÇ¿¬»êÀÚ ¹®ÀÚ¿­ »èÁ¦(¸¶Áö¸·À¸·Î ÀÔ·ÂµÈ ¼ıÀÚ)

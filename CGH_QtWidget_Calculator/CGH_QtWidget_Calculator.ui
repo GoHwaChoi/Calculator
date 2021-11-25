@@ -721,7 +721,7 @@ color: rgb(240, 240, 240);</string>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QPushButton" name="pushButton_backspace">
+           <widget class="QPushButton" name="pushButton_backspaceNum">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -833,9 +833,9 @@ color: rgb(240, 240, 240);</string>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QPushButton" name="pushButton_clearExpr">
+           <widget class="QPushButton" name="pushButton_backspaceExpr">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -855,11 +855,11 @@ color: rgb(240, 240, 240);</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(128, 152, 168);
-color: rgb(132, 132, 132);</string>
+             <string notr="true">background-color: rgb(80, 95, 105);
+color: rgb(240, 240, 240);</string>
             </property>
             <property name="text">
-             <string>CE</string>
+             <string>BE</string>
             </property>
            </widget>
           </item>
