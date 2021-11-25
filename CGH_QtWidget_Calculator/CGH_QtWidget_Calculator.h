@@ -16,6 +16,7 @@ private:
 public:
     //사용자 지정 함수
     void setCalcData(QString strNum);                   //lineEdit_num 위젯에 숫자열 출력
+    void closeEvent(QCloseEvent* event);                //alt+f4 종료 기능 비활성화
 
     // 버튼 UI 슬롯 : 버튼의 문자를 lineEdit 위젯으로 전달
     void on_Button_0();
@@ -37,7 +38,7 @@ public:
 
     void on_Button_result();
     void on_Button_clearCalc();
-    void on_Button_backspaceNum();
+    void on_Button_exit();
     void on_Button_backspaceExpr();
     void on_Button_selectNegOrPos();
 };

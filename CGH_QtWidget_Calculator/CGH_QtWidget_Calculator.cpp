@@ -5,6 +5,7 @@
 #include <iostream>
 #include "QDir"
 #include "QDebug"
+#include <QCloseEvent>
 
 CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
     : QMainWindow(parent)
@@ -33,9 +34,10 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
     //ºÎ°¡±â´É ¹öÆ° ÀÔ·Â
     connect(ui.pushButton_result, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_result);
     connect(ui.pushButton_clearCalc, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearCalc);
-    connect(ui.pushButton_backspaceNum, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceNum);
+    //connect(ui.pushButton_backspaceNum, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceNum);
     connect(ui.pushButton_backspaceExpr, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceExpr);
     connect(ui.pushButton_selectNegOrPos, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_selectNegOrPos);
+    connect(ui.pushButton_exit, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_exit);
 }
 
 void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ¯
@@ -62,15 +64,15 @@ void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ
     }
 }
 
-void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ö½Ä ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceExpr)
-{
-    auto strExpr = ui.lineEdit_expr->text();
-    auto stdExpr = strExpr.toStdString();
-    auto strExprModi = stdExpr.substr(0, stdExpr.length() - 1);
-    ui.lineEdit_expr->setText(QString::fromStdString(strExprModi));
-}
+//void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ö½Ä ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceExpr)
+//{
+//    auto strExpr = ui.lineEdit_expr->text();
+//    auto stdExpr = strExpr.toStdString();
+//    auto strExprModi = stdExpr.substr(0, stdExpr.length() - 1);
+//    ui.lineEdit_expr->setText(QString::fromStdString(strExprModi));
+//}
 
-void CGH_QtWidget_Calculator::on_Button_backspaceNum()     //¼ıÀÚ ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceNum)
+void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ıÀÚ ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceNum)
 {
 	auto strPrev = ui.lineEdit_num->text();
 	auto stdPrev = strPrev.toStdString();
@@ -82,6 +84,16 @@ void CGH_QtWidget_Calculator::on_Button_clearCalc()     //ÀÔ·ÂµÈ ¼ö½Ä ¹× ÇÇ¿¬»êÀ
 {
     ui.lineEdit_num->setText("");
     ui.lineEdit_expr->setText("");
+}
+
+void CGH_QtWidget_Calculator::on_Button_exit()
+{
+    exit(EXIT_FAILURE);
+}
+
+void CGH_QtWidget_Calculator::closeEvent(QCloseEvent* event)
+{
+	event->ignore();
 }
 
 void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //¼ıÀÚ ¹öÆ° ÀÔ·Â ½Ã ¼ö½Ä ¹× ¼ıÀÚ ¹®ÀÚ¿­ Ãâ·Â

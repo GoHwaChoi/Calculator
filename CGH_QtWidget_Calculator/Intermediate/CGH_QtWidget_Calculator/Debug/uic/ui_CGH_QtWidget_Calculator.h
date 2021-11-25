@@ -48,14 +48,14 @@ public:
     QPushButton *pushButton_0;
     QPushButton *pushButton_00;
     QGridLayout *gridLayout_2;
-    QPushButton *pushButton_divide;
     QPushButton *pushButton_result;
-    QPushButton *pushButton_clearCalc;
-    QPushButton *pushButton_backspaceNum;
     QPushButton *pushButton_plus;
     QPushButton *pushButton_minus;
-    QPushButton *pushButton_multiple;
+    QPushButton *pushButton_divide;
     QPushButton *pushButton_backspaceExpr;
+    QPushButton *pushButton_multiple;
+    QPushButton *pushButton_clearCalc;
+    QPushButton *pushButton_exit;
     QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *CGH_QtWidget_CalculatorClass)
@@ -125,7 +125,11 @@ public:
         sizePolicy1.setHeightForWidth(lineEdit_num->sizePolicy().hasHeightForWidth());
         lineEdit_num->setSizePolicy(sizePolicy1);
         QFont font1;
-        font1.setPointSize(40);
+        font1.setFamily(QStringLiteral("Bahnschrift Light"));
+        font1.setPointSize(36);
+        font1.setBold(false);
+        font1.setItalic(false);
+        font1.setWeight(50);
         lineEdit_num->setFont(font1);
         lineEdit_num->setLayoutDirection(Qt::LeftToRight);
         lineEdit_num->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
@@ -281,6 +285,39 @@ public:
         gridLayout_2->setSpacing(10);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(5, 0, 0, 0);
+        pushButton_result = new QPushButton(centralWidget);
+        pushButton_result->setObjectName(QStringLiteral("pushButton_result"));
+        sizePolicy1.setHeightForWidth(pushButton_result->sizePolicy().hasHeightForWidth());
+        pushButton_result->setSizePolicy(sizePolicy1);
+        pushButton_result->setMinimumSize(QSize(40, 40));
+        pushButton_result->setFont(font2);
+        pushButton_result->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+"color: rgb(240, 240, 240);"));
+
+        gridLayout_2->addWidget(pushButton_result, 6, 1, 1, 1);
+
+        pushButton_plus = new QPushButton(centralWidget);
+        pushButton_plus->setObjectName(QStringLiteral("pushButton_plus"));
+        sizePolicy1.setHeightForWidth(pushButton_plus->sizePolicy().hasHeightForWidth());
+        pushButton_plus->setSizePolicy(sizePolicy1);
+        pushButton_plus->setMinimumSize(QSize(40, 40));
+        pushButton_plus->setFont(font2);
+        pushButton_plus->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+"color: rgb(240, 240, 240);"));
+
+        gridLayout_2->addWidget(pushButton_plus, 6, 0, 1, 1);
+
+        pushButton_minus = new QPushButton(centralWidget);
+        pushButton_minus->setObjectName(QStringLiteral("pushButton_minus"));
+        sizePolicy1.setHeightForWidth(pushButton_minus->sizePolicy().hasHeightForWidth());
+        pushButton_minus->setSizePolicy(sizePolicy1);
+        pushButton_minus->setMinimumSize(QSize(40, 40));
+        pushButton_minus->setFont(font2);
+        pushButton_minus->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+"color: rgb(240, 240, 240);"));
+
+        gridLayout_2->addWidget(pushButton_minus, 5, 0, 1, 1);
+
         pushButton_divide = new QPushButton(centralWidget);
         pushButton_divide->setObjectName(QStringLiteral("pushButton_divide"));
         sizePolicy1.setHeightForWidth(pushButton_divide->sizePolicy().hasHeightForWidth());
@@ -292,60 +329,16 @@ public:
 
         gridLayout_2->addWidget(pushButton_divide, 2, 0, 1, 1);
 
-        pushButton_result = new QPushButton(centralWidget);
-        pushButton_result->setObjectName(QStringLiteral("pushButton_result"));
-        sizePolicy1.setHeightForWidth(pushButton_result->sizePolicy().hasHeightForWidth());
-        pushButton_result->setSizePolicy(sizePolicy1);
-        pushButton_result->setMinimumSize(QSize(40, 40));
-        pushButton_result->setFont(font2);
-        pushButton_result->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
-"color: rgb(240, 240, 240);"));
-
-        gridLayout_2->addWidget(pushButton_result, 5, 1, 1, 1);
-
-        pushButton_clearCalc = new QPushButton(centralWidget);
-        pushButton_clearCalc->setObjectName(QStringLiteral("pushButton_clearCalc"));
-        sizePolicy1.setHeightForWidth(pushButton_clearCalc->sizePolicy().hasHeightForWidth());
-        pushButton_clearCalc->setSizePolicy(sizePolicy1);
-        pushButton_clearCalc->setMinimumSize(QSize(40, 40));
-        pushButton_clearCalc->setFont(font2);
-        pushButton_clearCalc->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
-"color: rgb(240, 240, 240);"));
-
-        gridLayout_2->addWidget(pushButton_clearCalc, 4, 1, 1, 1);
-
-        pushButton_backspaceNum = new QPushButton(centralWidget);
-        pushButton_backspaceNum->setObjectName(QStringLiteral("pushButton_backspaceNum"));
-        sizePolicy1.setHeightForWidth(pushButton_backspaceNum->sizePolicy().hasHeightForWidth());
-        pushButton_backspaceNum->setSizePolicy(sizePolicy1);
-        pushButton_backspaceNum->setMinimumSize(QSize(40, 40));
-        pushButton_backspaceNum->setFont(font2);
-        pushButton_backspaceNum->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+        pushButton_backspaceExpr = new QPushButton(centralWidget);
+        pushButton_backspaceExpr->setObjectName(QStringLiteral("pushButton_backspaceExpr"));
+        sizePolicy1.setHeightForWidth(pushButton_backspaceExpr->sizePolicy().hasHeightForWidth());
+        pushButton_backspaceExpr->setSizePolicy(sizePolicy1);
+        pushButton_backspaceExpr->setMinimumSize(QSize(40, 40));
+        pushButton_backspaceExpr->setFont(font2);
+        pushButton_backspaceExpr->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
 "image: url(:/CGH_QtWidget_Calculator/icon/delete_64.png);"));
 
-        gridLayout_2->addWidget(pushButton_backspaceNum, 2, 1, 1, 1);
-
-        pushButton_plus = new QPushButton(centralWidget);
-        pushButton_plus->setObjectName(QStringLiteral("pushButton_plus"));
-        sizePolicy1.setHeightForWidth(pushButton_plus->sizePolicy().hasHeightForWidth());
-        pushButton_plus->setSizePolicy(sizePolicy1);
-        pushButton_plus->setMinimumSize(QSize(40, 40));
-        pushButton_plus->setFont(font2);
-        pushButton_plus->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
-"color: rgb(240, 240, 240);"));
-
-        gridLayout_2->addWidget(pushButton_plus, 5, 0, 1, 1);
-
-        pushButton_minus = new QPushButton(centralWidget);
-        pushButton_minus->setObjectName(QStringLiteral("pushButton_minus"));
-        sizePolicy1.setHeightForWidth(pushButton_minus->sizePolicy().hasHeightForWidth());
-        pushButton_minus->setSizePolicy(sizePolicy1);
-        pushButton_minus->setMinimumSize(QSize(40, 40));
-        pushButton_minus->setFont(font2);
-        pushButton_minus->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
-"color: rgb(240, 240, 240);"));
-
-        gridLayout_2->addWidget(pushButton_minus, 4, 0, 1, 1);
+        gridLayout_2->addWidget(pushButton_backspaceExpr, 2, 1, 1, 1);
 
         pushButton_multiple = new QPushButton(centralWidget);
         pushButton_multiple->setObjectName(QStringLiteral("pushButton_multiple"));
@@ -358,17 +351,32 @@ public:
 
         gridLayout_2->addWidget(pushButton_multiple, 3, 0, 1, 1);
 
-        pushButton_backspaceExpr = new QPushButton(centralWidget);
-        pushButton_backspaceExpr->setObjectName(QStringLiteral("pushButton_backspaceExpr"));
-        pushButton_backspaceExpr->setEnabled(true);
-        sizePolicy1.setHeightForWidth(pushButton_backspaceExpr->sizePolicy().hasHeightForWidth());
-        pushButton_backspaceExpr->setSizePolicy(sizePolicy1);
-        pushButton_backspaceExpr->setMinimumSize(QSize(40, 40));
-        pushButton_backspaceExpr->setFont(font2);
-        pushButton_backspaceExpr->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+        pushButton_clearCalc = new QPushButton(centralWidget);
+        pushButton_clearCalc->setObjectName(QStringLiteral("pushButton_clearCalc"));
+        sizePolicy1.setHeightForWidth(pushButton_clearCalc->sizePolicy().hasHeightForWidth());
+        pushButton_clearCalc->setSizePolicy(sizePolicy1);
+        pushButton_clearCalc->setMinimumSize(QSize(40, 40));
+        pushButton_clearCalc->setFont(font2);
+        pushButton_clearCalc->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
 "color: rgb(240, 240, 240);"));
 
-        gridLayout_2->addWidget(pushButton_backspaceExpr, 3, 1, 1, 1);
+        gridLayout_2->addWidget(pushButton_clearCalc, 3, 1, 1, 1);
+
+        pushButton_exit = new QPushButton(centralWidget);
+        pushButton_exit->setObjectName(QStringLiteral("pushButton_exit"));
+        pushButton_exit->setEnabled(true);
+        sizePolicy1.setHeightForWidth(pushButton_exit->sizePolicy().hasHeightForWidth());
+        pushButton_exit->setSizePolicy(sizePolicy1);
+        pushButton_exit->setMinimumSize(QSize(40, 40));
+        QFont font3;
+        font3.setPointSize(20);
+        font3.setBold(true);
+        font3.setWeight(75);
+        pushButton_exit->setFont(font3);
+        pushButton_exit->setStyleSheet(QLatin1String("background-color: rgb(80, 95, 105);\n"
+"color: rgb(255, 0, 0);"));
+
+        gridLayout_2->addWidget(pushButton_exit, 5, 1, 1, 1);
 
 
         horizontalLayout->addLayout(gridLayout_2);
@@ -378,9 +386,9 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        verticalLayout->setStretch(0, 1);
-        verticalLayout->setStretch(1, 2);
-        verticalLayout->setStretch(2, 7);
+        verticalLayout->setStretch(0, 2);
+        verticalLayout->setStretch(1, 3);
+        verticalLayout->setStretch(2, 10);
 
         gridLayout_3->addLayout(verticalLayout, 0, 0, 1, 1);
 
@@ -409,14 +417,14 @@ public:
         pushButton_selectNegOrPos->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "+/-", nullptr));
         pushButton_0->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "0", nullptr));
         pushButton_00->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "00", nullptr));
-        pushButton_divide->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "/", nullptr));
         pushButton_result->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "=", nullptr));
-        pushButton_clearCalc->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "C", nullptr));
-        pushButton_backspaceNum->setText(QString());
         pushButton_plus->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "+", nullptr));
         pushButton_minus->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "-", nullptr));
+        pushButton_divide->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "/", nullptr));
+        pushButton_backspaceExpr->setText(QString());
         pushButton_multiple->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "X", nullptr));
-        pushButton_backspaceExpr->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "BE", nullptr));
+        pushButton_clearCalc->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "C", nullptr));
+        pushButton_exit->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "EXIT", nullptr));
     } // retranslateUi
 
 };
