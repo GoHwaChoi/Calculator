@@ -43,25 +43,24 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
 void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //양수, 음수 전환
 {
     auto strPrev = ui.lineEdit_num->text();     //숫자 입력창에서 텍스트 가져옴
+    auto stdPrev = strPrev.toStdString();       //QString을 String 타입으로 변환
+    auto checkMinus = stdPrev.substr(0, 1);     //문자열 중 첫번째 문자 1개만 추출
 
-    if (! strPrev.isEmpty())                    //입력창의 텍스트가 있는 경우
+    /*--------------------------------------------------------------------
+        - 부호가 없는 경우
+    --------------------------------------------------------------------*/
+    if (checkMinus != "-")                      //"-" 부호가 없는 경우
     {
-        auto stdPrev = strPrev.toStdString();   //QString을 String 타입으로 변환
-        auto checkMinus = stdPrev.substr(0, 1); //문자열 중 첫번째 문자 1개만 추출
-        if (checkMinus != "-")                  //숫자 입력 시 - 부호를 입력한 경우
-        {
-            auto strModi = "-" + stdPrev;       //
-            ui.lineEdit_num->setText(QString::fromStdString(strModi));
-        }
-        else
-        {
-            auto strModi = stdPrev.substr(1, stdPrev.length() - 1);
-            ui.lineEdit_num->setText(QString::fromStdString(strModi));
-        }
+        auto strModi = "-" + stdPrev;                                   //- 부호를 문장열 왼쪽 끝에 덧붙임
+        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String 문자열을 QString 문자열로 변환
     }
-    else                                      //입력창의 텍스트가 없는 경우 예외 처리
+    /*--------------------------------------------------------------------
+        - 부호가 있는 경우
+    --------------------------------------------------------------------*/
+    else
     {
-        QMessageBox::warning(this, "Error Expression!", "There is no exist data of expression. Input the Expression!");
+        auto strModi = stdPrev.substr(1, stdPrev.length() - 1);         //숫자 부분만 반환하여 출력
+        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String 문자열을 QString 문자열로 변환
     }
 }
 
