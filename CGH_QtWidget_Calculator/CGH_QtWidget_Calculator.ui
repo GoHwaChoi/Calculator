@@ -10,8 +10,14 @@
     <height>761</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>450</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>CGH_QtWidget_Calculator</string>
+   <string>사칙연산 계산기 - 정수</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(25, 35, 45);

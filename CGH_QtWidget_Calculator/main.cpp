@@ -1,4 +1,4 @@
-#include "CGH_QtWidget_Calculator.h"
+﻿#include "CGH_QtWidget_Calculator.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])

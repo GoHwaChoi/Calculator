@@ -1,4 +1,4 @@
-#include "CGH_QtWidget_Calculator.h"
+ï»¿#include "CGH_QtWidget_Calculator.h"
 #include "calculator.hpp"
 #include <string>
 #include <QMessageBox>
@@ -12,7 +12,7 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
 {
     ui.setupUi(this);
 
-    //¼ıÀÚ¹öÆ° ÀÔ·Â
+    //ìˆ«ìë²„íŠ¼ ì…ë ¥
     connect(ui.pushButton_0, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_0);
     connect(ui.pushButton_1, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_1);
     connect(ui.pushButton_2, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_2);
@@ -25,109 +25,101 @@ CGH_QtWidget_Calculator::CGH_QtWidget_Calculator(QWidget* parent)
     connect(ui.pushButton_9, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_9);
     connect(ui.pushButton_00, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_00);
 
-    //¿¬»êÀÚ ¹öÆ° ÀÔ·Â
+    //ì—°ì‚°ì ë²„íŠ¼ ì…ë ¥
     connect(ui.pushButton_plus, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_plus);
     connect(ui.pushButton_minus, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_minus);
     connect(ui.pushButton_multiple, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_multiple);
     connect(ui.pushButton_divide, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_divide);
     
-    //ºÎ°¡±â´É ¹öÆ° ÀÔ·Â
+    //ë¶€ê°€ê¸°ëŠ¥ ë²„íŠ¼ ì…ë ¥
     connect(ui.pushButton_result, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_result);
     connect(ui.pushButton_clearCalc, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_clearCalc);
-    //connect(ui.pushButton_backspaceNum, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceNum);
     connect(ui.pushButton_backspaceExpr, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_backspaceExpr);
     connect(ui.pushButton_selectNegOrPos, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_selectNegOrPos);
     connect(ui.pushButton_exit, &QAbstractButton::clicked, this, &CGH_QtWidget_Calculator::on_Button_exit);
 }
 
-void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //¾ç¼ö, À½¼ö ÀüÈ¯
+void CGH_QtWidget_Calculator::on_Button_selectNegOrPos()        //ì–‘ìˆ˜, ìŒìˆ˜ ì „í™˜
 {
-    auto strPrev = ui.lineEdit_num->text();     //¼ıÀÚ ÀÔ·ÂÃ¢¿¡¼­ ÅØ½ºÆ® °¡Á®¿È
-    auto stdPrev = strPrev.toStdString();       //QStringÀ» String Å¸ÀÔÀ¸·Î º¯È¯
-    auto checkMinus = stdPrev.substr(0, 1);     //¹®ÀÚ¿­ Áß Ã¹¹øÂ° ¹®ÀÚ 1°³¸¸ ÃßÃâ
+    auto strPrev = ui.lineEdit_num->text();     //ìˆ«ì ì…ë ¥ì°½ì—ì„œ í…ìŠ¤íŠ¸ ê°€ì ¸ì˜´
+    auto stdPrev = strPrev.toStdString();       //QStringì„ String íƒ€ì…ìœ¼ë¡œ ë³€í™˜
+    auto checkMinus = stdPrev.substr(0, 1);     //ë¬¸ìì—´ ì¤‘ ì²«ë²ˆì§¸ ë¬¸ì 1ê°œë§Œ ì¶”ì¶œ
 
     /*--------------------------------------------------------------------
-        - ºÎÈ£°¡ ¾ø´Â °æ¿ì
+        - ë¶€í˜¸ê°€ ì—†ëŠ” ê²½ìš°
     --------------------------------------------------------------------*/
-    if (checkMinus != "-")                      //"-" ºÎÈ£°¡ ¾ø´Â °æ¿ì
+    if (checkMinus != "-")                      //"-" ë¶€í˜¸ê°€ ì—†ëŠ” ê²½ìš°
     {
-        auto strModi = "-" + stdPrev;                                   //- ºÎÈ£¸¦ ¹®Àå¿­ ¿ŞÂÊ ³¡¿¡ µ¡ºÙÀÓ
-        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String ¹®ÀÚ¿­À» QString ¹®ÀÚ¿­·Î º¯È¯
+        auto strModi = "-" + stdPrev;                                   //- ë¶€í˜¸ë¥¼ ë¬¸ì¥ì—´ ì™¼ìª½ ëì— ë§ë¶™ì„
+        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String ë¬¸ìì—´ì„ QString ë¬¸ìì—´ë¡œ ë³€í™˜
     }
     /*--------------------------------------------------------------------
-        - ºÎÈ£°¡ ÀÖ´Â °æ¿ì
+        - ë¶€í˜¸ê°€ ìˆëŠ” ê²½ìš°
     --------------------------------------------------------------------*/
     else
     {
-        auto strModi = stdPrev.substr(1, stdPrev.length() - 1);         //¼ıÀÚ ºÎºĞ¸¸ ¹İÈ¯ÇÏ¿© Ãâ·Â
-        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String ¹®ÀÚ¿­À» QString ¹®ÀÚ¿­·Î º¯È¯
+        auto strModi = stdPrev.substr(1, stdPrev.length() - 1);         //ìˆ«ì ë¶€ë¶„ë§Œ ë°˜í™˜í•˜ì—¬ ì¶œë ¥
+        ui.lineEdit_num->setText(QString::fromStdString(strModi));      //String ë¬¸ìì—´ì„ QString ë¬¸ìì—´ë¡œ ë³€í™˜
     }
 }
 
-//void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ö½Ä ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceExpr)
-//{
-//    auto strExpr = ui.lineEdit_expr->text();
-//    auto stdExpr = strExpr.toStdString();
-//    auto strExprModi = stdExpr.substr(0, stdExpr.length() - 1);
-//    ui.lineEdit_expr->setText(QString::fromStdString(strExprModi));
-//}
-
-void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //¼ıÀÚ ¸¶Áö¸· ¹®ÀÚ¿­ Áö¿ì±â(on_Button_backspaceNum)
+void CGH_QtWidget_Calculator::on_Button_backspaceExpr()     //ìˆ˜ì‹ ë§ˆì§€ë§‰ ë¬¸ìì—´ ì§€ìš°ê¸°, ìˆ«ì ë¬¸ìì—´ ì§€ìš°ê¸°
 {
-	auto strPrev = ui.lineEdit_num->text();
-	auto stdPrev = strPrev.toStdString();
-	auto strPrevModi = stdPrev.substr(0, stdPrev.length() - 1);
-	ui.lineEdit_num->setText(QString::fromStdString(strPrevModi));
+	auto strExpr = ui.lineEdit_expr->text();
+	auto stdExpr = strExpr.toStdString();
+	auto stdExprLastchrDel = stdExpr.substr(0, stdExpr.length() - 1);
+	ui.lineEdit_expr->setText(QString::fromStdString(stdExprLastchrDel));
+    ui.lineEdit_num->setText("");
 }
 
-void CGH_QtWidget_Calculator::on_Button_clearCalc()     //ÀÔ·ÂµÈ ¼ö½Ä ¹× ÇÇ¿¬»êÀÚ ¹®ÀÚ¿­ »èÁ¦(¸¶Áö¸·À¸·Î ÀÔ·ÂµÈ ¼ıÀÚ)
+void CGH_QtWidget_Calculator::on_Button_clearCalc()     //ì…ë ¥ëœ ìˆ˜ì‹ ë° í”¼ì—°ì‚°ì ë¬¸ìì—´ ì‚­ì œ(ë§ˆì§€ë§‰ìœ¼ë¡œ ì…ë ¥ëœ ìˆ«ì)
 {
     ui.lineEdit_num->setText("");
     ui.lineEdit_expr->setText("");
 }
 
-void CGH_QtWidget_Calculator::on_Button_exit()
+void CGH_QtWidget_Calculator::on_Button_exit()          //í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 {
     exit(EXIT_FAILURE);
 }
 
-void CGH_QtWidget_Calculator::closeEvent(QCloseEvent* event)
+void CGH_QtWidget_Calculator::closeEvent(QCloseEvent* event)        // Alt+F4 ìœˆë„ìš° ë‹¨ì¶•í‚¤ ë¹„í™œì„±í™”
 {
 	event->ignore();
 }
 
-void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //¼ıÀÚ ¹öÆ° ÀÔ·Â ½Ã ¼ö½Ä ¹× ¼ıÀÚ ¹®ÀÚ¿­ Ãâ·Â
+void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //ìˆ«ì ë²„íŠ¼ ì…ë ¥ ì‹œ ìˆ˜ì‹ ë° ìˆ«ì ë¬¸ìì—´ ì¶œë ¥
 {   
-    auto strPrev = ui.lineEdit_num->text();             //¼ıÀÚ ¹®ÀÚ¿­ÀÇ Ãâ·Â ´©Àû°ª °¡Á®¿È
+    auto strPrev = ui.lineEdit_num->text();             //ìˆ«ì ë¬¸ìì—´ì˜ ì¶œë ¥ ëˆ„ì ê°’ ê°€ì ¸ì˜´
     
     /*--------------------------------------------------------------------
-        ¿¬»êÀÚ ¹öÆ° ÀÔ·Â ( + , - , * , / )
+        ì—°ì‚°ì ë²„íŠ¼ ì…ë ¥ ( + , - , * , / )
     --------------------------------------------------------------------*/
-	if (strNum == "+" || strNum == "-" || strNum == "*" || strNum == "/")       //¿¬»êÀÚ ¹öÆ°À» ´­·¶À» °æ¿ì
+	if (strNum == "+" || strNum == "-" || strNum == "*" || strNum == "/")       //ì—°ì‚°ì ë²„íŠ¼ì„ ëˆŒë €ì„ ê²½ìš°
 	{
-        auto strExpr = ui.lineEdit_expr->text();        //»ó´Ü lineEditÀ§Á¬¿¡¼­ ¼ö½Ä °¡Á®¿È
+        auto strExpr = ui.lineEdit_expr->text();        //ìƒë‹¨ lineEditìœ„ì ¯ì—ì„œ ìˆ˜ì‹ ê°€ì ¸ì˜´
 
         /*--------------------------------------------------------------------
-            ÇÇ¿¬»êÀÚ°¡ ÀÔ·ÂµÈ °æ¿ì (¼ıÀÚ ÀÔ·ÂÃ¢ÀÌ ºñ¾îÀÖÁö ¾ÊÀº °æ¿ì)
+            í”¼ì—°ì‚°ìê°€ ì…ë ¥ëœ ê²½ìš° (ìˆ«ì ì…ë ¥ì°½ì´ ë¹„ì–´ìˆì§€ ì•Šì€ ê²½ìš°)
         --------------------------------------------------------------------*/
         if (! strPrev.isEmpty())
         {
-            auto strExprLast = strExpr.right(1);            //±âÁ¸ ¼ö½ÄÀÇ ¸¶Áö¸· ¹®ÀÚ ÀúÀå
+            auto strExprLast = strExpr.right(1);            //ê¸°ì¡´ ìˆ˜ì‹ì˜ ë§ˆì§€ë§‰ ë¬¸ì ì €ì¥
             /*--------------------------------------------------------------------
-                ±âÁ¸ ¼ö½ÄÀÌ °è»ê °á°ú°ªÀÌ Ãâ·ÂµÈ °æ¿ì(¿¬»êÀÚ ÀÔ·Â ½Ã ¼ö½Ä¿¡ "=" ¹®ÀÚ°¡ ÀÖÀ¸¸é)                
+                ê¸°ì¡´ ìˆ˜ì‹ì´ ê³„ì‚° ê²°ê³¼ê°’ì´ ì¶œë ¥ëœ ê²½ìš°(ì—°ì‚°ì ì…ë ¥ ì‹œ ìˆ˜ì‹ì— "=" ë¬¸ìê°€ ìˆìœ¼ë©´)                
             --------------------------------------------------------------------*/
             if (strExprLast == "=")
             {
-                strExpr = strPrev + strNum;                 //°è»ê °á°ú°ª¿¡ ÀÔ·ÂÇÑ ¿¬»êÀÚ¸¦ Ãß°¡ÇÏ¿© »õ·Î¿î ¼ö½ÄÀ» ÀÌ¾î°¨
+                strExpr = strPrev + strNum;                 //ê³„ì‚° ê²°ê³¼ê°’ì— ì…ë ¥í•œ ì—°ì‚°ìë¥¼ ì¶”ê°€í•˜ì—¬ ìƒˆë¡œìš´ ìˆ˜ì‹ì„ ì´ì–´ê°
 
-                ui.lineEdit_expr->setText(strExpr);         //½Å±Ô ¼ö½Ä Ãâ·Â
-                ui.lineEdit_num->setText("");               //¼ıÀÚ ÀÔ·ÂÃ¢¿¡ ´ÙÀ½ ¼ıÀÚ°¡ ÀÔ·ÂµÇµµ·Ï ¹®ÀÚ¿­ ÃÊ±âÈ­
+                ui.lineEdit_expr->setText(strExpr);         //ì‹ ê·œ ìˆ˜ì‹ ì¶œë ¥
+                ui.lineEdit_num->setText("");               //ìˆ«ì ì…ë ¥ì°½ì— ë‹¤ìŒ ìˆ«ìê°€ ì…ë ¥ë˜ë„ë¡ ë¬¸ìì—´ ì´ˆê¸°í™”
             }
             /*--------------------------------------------------------------------
-                ¼ö½Ä¿¡ 0 ³ª´°¼ÀÀÌ ÀÔ·ÂµÈ °æ¿ì
-                ¿¹¿Ü Ã³¸®(¼ö½Ä ÃÊ±âÈ­)
+                ìˆ˜ì‹ì— 0 ë‚˜ëˆ—ì…ˆì´ ì…ë ¥ëœ ê²½ìš°
+                ì˜ˆì™¸ ì²˜ë¦¬(ìˆ˜ì‹ ì´ˆê¸°í™”)
             --------------------------------------------------------------------*/
-            else if ((strExprLast == "/" && (strPrev == "0" || strPrev == "00")))
+            else if ((strExprLast == "/" && (strPrev == "0" || strPrev == "00")))   //ë‚˜ëˆ—ì…ˆì´ ìˆ˜ì‹ ëì— ìˆê³ , ìƒˆë¡œ ì…ë ¥ëœ í”¼ì—°ì‚°ìê°€ "0" ì¼ ë•Œ
             {
 				QMessageBox::warning(this, "Error Expression!", "Divide '0' inserted! Write Expression Correctly");
 				ui.lineEdit_num->setText("");
@@ -135,19 +127,19 @@ void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //¼ıÀÚ ¹öÆ° À
 				return;
             }
             /*--------------------------------------------------------------------
-			    ±âÁ¸ ¼ö½ÄÀ» °è¼Ó ÀÛ¼ºÁßÀÎ °æ¿ì(¿¬»êÀÚ ÀÔ·Â ½Ã ¼ö½Ä¿¡ "=" ¹®ÀÚ°¡ ¾øÀ¸¸é)
+			    ê¸°ì¡´ ìˆ˜ì‹ì„ ê³„ì† ì‘ì„±ì¤‘ì¸ ê²½ìš°(ì—°ì‚°ì ì…ë ¥ ì‹œ ìˆ˜ì‹ì— "=" ë¬¸ìê°€ ì—†ìœ¼ë©´)
 			--------------------------------------------------------------------*/
             else
             {
-				strExpr += strPrev + strNum;                    //±âÁ¸ ¼ö½Ä¿¡ ¼ıÀÚ¿Í ¿¬»êÀÚ Ãß°¡
+				strExpr += strPrev + strNum;                    //ê¸°ì¡´ ìˆ˜ì‹ì— ìˆ«ìì™€ ì—°ì‚°ì ì¶”ê°€
 
-				ui.lineEdit_expr->setText(strExpr);             //¼ö½Ä ´©ÀûÇÏ¿© lineEditÀ§Á¬¿¡ Ãâ·Â
-				ui.lineEdit_num->setText("");                   //¼ıÀÚ ÀÔ·ÂÃ¢¿¡ ´ÙÀ½ ¼ıÀÚ°¡ ÀÔ·ÂµÇµµ·Ï ¹®ÀÚ¿­ ÃÊ±âÈ­
+				ui.lineEdit_expr->setText(strExpr);             //ìˆ˜ì‹ ëˆ„ì í•˜ì—¬ lineEditìœ„ì ¯ì— ì¶œë ¥
+				ui.lineEdit_num->setText("");                   //ìˆ«ì ì…ë ¥ì°½ì— ë‹¤ìŒ ìˆ«ìê°€ ì…ë ¥ë˜ë„ë¡ ë¬¸ìì—´ ì´ˆê¸°í™”
             }
         }
         /*--------------------------------------------------------------------
-			¼ö½ÄÀÌ ¾øÀ» ¶§ ¿¬»êÀÚºÎÅÍ ÀÔ·ÂÇÑ °æ¿ì
-            ¿¹¿ÜÃ³¸®
+			ìˆ˜ì‹ì´ ì—†ì„ ë•Œ ì—°ì‚°ìë¶€í„° ì…ë ¥í•œ ê²½ìš°
+            ì˜ˆì™¸ì²˜ë¦¬
 		--------------------------------------------------------------------*/
         else if (strExpr.isEmpty())
         {
@@ -155,63 +147,90 @@ void CGH_QtWidget_Calculator::setCalcData(QString strNum)          //¼ıÀÚ ¹öÆ° À
             return;
         }
         /*--------------------------------------------------------------------
-		    ¿¬»êÀÚ¸¦ ¿¬¼ÓÇÏ¿© 2¹øÀÌ»ó ÀÔ·ÂÇÏ´Â °æ¿ì (¼ıÀÚ ÀÔ·ÂÃ¢ÀÌ ºñ¾îÀÖ´Â °æ¿ì)
-                ±âÁ¸ ¿¬»êÀÚ¸¦ »èÁ¦ÇÏ°í ÀÔ·ÂµÈ ¿¬»êÀÚ¸¦ Ãß°¡ÇÔ
+		    ì—°ì‚°ìë¥¼ ì—°ì†í•˜ì—¬ 2ë²ˆì´ìƒ ì…ë ¥í•˜ëŠ” ê²½ìš° (ìˆ«ì ì…ë ¥ì°½ì´ ë¹„ì–´ìˆëŠ” ê²½ìš°)
+                ê¸°ì¡´ ì—°ì‚°ìë¥¼ ì‚­ì œí•˜ê³  ì…ë ¥ëœ ì—°ì‚°ìë¥¼ ì¶”ê°€í•¨
 		--------------------------------------------------------------------*/
         else
         {
-            strExpr.chop(1);                                //¿À¸¥ÂÊ ³¡¿¡¼­ºÎÅÍ ÀÔ·ÂµÈ ¼ö¸¸Å­ Á¦°Å
-            strExpr += strNum;                              //±âÁ¸ ¼ö½Ä¿¡¼­ ¸¶Áö¸· ¿¬»êÀÚ »èÁ¦ ÈÄ ÀÔ·ÂµÈ ¿¬»êÀÚ Ãß°¡
+            strExpr.chop(1);                                //ì˜¤ë¥¸ìª½ ëì—ì„œë¶€í„° ì…ë ¥ëœ ìˆ˜ë§Œí¼ ì œê±°
+            strExpr += strNum;                              //ê¸°ì¡´ ìˆ˜ì‹ì—ì„œ ë§ˆì§€ë§‰ ì—°ì‚°ì ì‚­ì œ í›„ ì…ë ¥ëœ ì—°ì‚°ì ì¶”ê°€
 
-            ui.lineEdit_expr->setText(strExpr);             //¼ö½Ä ´©ÀûÇÏ¿© lineEditÀ§Á¬¿¡ Ãâ·Â
+            ui.lineEdit_expr->setText(strExpr);             //ìˆ˜ì‹ ëˆ„ì í•˜ì—¬ lineEditìœ„ì ¯ì— ì¶œë ¥
         }
 	}
     /*--------------------------------------------------------------------
-		¿¬»êÀÚ ÀÌ¿ÜÀÇ ¹öÆ° ÀÔ·Â ( ¼ıÀÚ, À½¼ö¾ç¼ö(+/-) )
+		ì—°ì‚°ì ì´ì™¸ì˜ ë²„íŠ¼ ì…ë ¥ ( ìˆ«ì, ìŒìˆ˜ì–‘ìˆ˜(+/-) )
 	--------------------------------------------------------------------*/
     else
     {                                                   
-        auto strExpr      = ui.lineEdit_expr->text();       //¼ö½Ä Ãâ·ÂÃ¢ ¹®ÀÚ¿­ °¡Á®¿È
-        auto checkEndExpr = strExpr.right(1);               //¼ö½ÄÀÌ °á°ú°ªÀ» Ãâ·ÂÇÑ °æ¿ì ÀÎ½Ä (¼ö½Ä ¸¶Áö¸· ¹®ÀÚ 1°³ ÃßÃâ)
-        //auto checkDivZero = strExpr.right(2);               //¼ö½Ä¿¡ 0À» ³ª´©´Â ³»¿ëÀÌ µé¾î°£ °æ¿ì ÀÎ½Ä (¼ö½Ä ¸¶Áö¸· ¹®ÀÚ¿­ 2°³ ÃßÃâ)
+        auto strExpr      = ui.lineEdit_expr->text();       //ìˆ˜ì‹ ì¶œë ¥ì°½ ë¬¸ìì—´ ê°€ì ¸ì˜´
+        auto checkEndExpr = strExpr.right(1);               //ìˆ˜ì‹ì´ ê²°ê³¼ê°’ì„ ì¶œë ¥í•œ ê²½ìš° ì¸ì‹ (ìˆ˜ì‹ ë§ˆì§€ë§‰ ë¬¸ì 1ê°œ ì¶”ì¶œ)
+        //auto checkDivZero = strExpr.right(2);               //ìˆ˜ì‹ì— 0ì„ ë‚˜ëˆ„ëŠ” ë‚´ìš©ì´ ë“¤ì–´ê°„ ê²½ìš° ì¸ì‹ (ìˆ˜ì‹ ë§ˆì§€ë§‰ ë¬¸ìì—´ 2ê°œ ì¶”ì¶œ)
 
         /*--------------------------------------------------------------------
-			¼ö½Ä °è»ê °á°ú°ªÀÌ Ãâ·ÂµÈ °æ¿ì
+			ìˆ˜ì‹ ê³„ì‚° ê²°ê³¼ê°’ì´ ì¶œë ¥ëœ ê²½ìš°
 		--------------------------------------------------------------------*/
-        if (checkEndExpr == "=")                        //°è»ê ¿Ï·á. °á°ú°ª ¿¬»ê Ãâ·ÂµÈ ÀÌÈÄ
+        if (checkEndExpr == "=")                        //ê³„ì‚° ì™„ë£Œ. ê²°ê³¼ê°’ ì—°ì‚° ì¶œë ¥ëœ ì´í›„
         {
-			ui.lineEdit_expr->setText("");              //¼ö½Ä Ãâ·ÂÃ¢ ÃÊ±âÈ­
-            strPrev.clear();                            //±âÁ¸ ¼ö½Ä ÀúÀåµÈ °ª »èÁ¦
+			ui.lineEdit_expr->setText("");              //ìˆ˜ì‹ ì¶œë ¥ì°½ ì´ˆê¸°í™”
+            strPrev.clear();                            //ê¸°ì¡´ ìˆ˜ì‹ ì €ì¥ëœ ê°’ ì‚­ì œ
                     
-			ui.lineEdit_num->setText(strNum);          //»õ·Î ÀÔ·ÂµÈ ¼ıÀÚ Ãâ·Â
+			ui.lineEdit_num->setText(strNum);          //ìƒˆë¡œ ì…ë ¥ëœ ìˆ«ì ì¶œë ¥
         }
         /*--------------------------------------------------------------------
-            ÇÇ¿¬»êÀÚ ´©Àû Ãâ·Â
+            í”¼ì—°ì‚°ì ëˆ„ì  ì¶œë ¥
         --------------------------------------------------------------------*/
         else
         {
-			strPrev += strNum;                          //¼ıÀÚ ÀÔ·Â°ª ´©ÀûÇÏ¿© ÀúÀå
+            //êµ¬í˜„ì¤‘
+            //auto sectionPlus = strExpr.section('+', -1, -1);
+            //auto sectionMinus = strExpr.section('-', -1, -1);
+            //auto sectionMulti = strExpr.section('*', -1, -1);
+            //auto sectionDivid = strExpr.section('/', -1, -1);
+            //
+            //auto sectionPlusLen = sectionPlus.length();
+            //auto sectionMinusLen = sectionMinus.length();
+            //auto sectionMultiLen = sectionMulti.length();
+            //auto sectionDividLen = sectionDivid.length();
+            //int i, minLen, temp;
+            //int length[4] =
+            //{
+            //    sectionPlusLen,
+            //    sectionMinusLen,
+            //    sectionMultiLen,
+            //    sectionDividLen
+            //};
+            //
+            //for (i = 0; i < 4; i++)
+            //{
+            //    temp = length[i];
+            //    if(minLen < temp)
+            //    
+            //}
 
-			ui.lineEdit_num->setText(strPrev);          //´©ÀûµÈ ¼ıÀÚ Ãâ·Â
+
+			strPrev += strNum;                          //ìˆ«ì ì…ë ¥ê°’ ëˆ„ì í•˜ì—¬ ì €ì¥
+
+			ui.lineEdit_num->setText(strPrev);          //ëˆ„ì ëœ ìˆ«ì ì¶œë ¥
         }
     }
 }
 
-void CGH_QtWidget_Calculator::on_Button_result()                //¼ö½Ä °á°ú°ª ¿¬»ê ¹öÆ° ½½·Ô
+void CGH_QtWidget_Calculator::on_Button_result()                //ìˆ˜ì‹ ê²°ê³¼ê°’ ì—°ì‚° ë²„íŠ¼ ìŠ¬ë¡¯
 {
     auto strExpr = ui.lineEdit_expr->text();
     auto strNum  = ui.lineEdit_num->text();
 
-    if (! strExpr.isEmpty())                                    //¼ö½ÄÀÌ ÀÔ·Â ÁßÀÏ ¶§, 
+    if (! strExpr.isEmpty())                                    //ìˆ˜ì‹ì´ ì…ë ¥ ì¤‘ì¼ ë•Œ, 
     {
 		auto stdExpr     = strExpr.toStdString();
 		auto stdNum      = strNum.toStdString();
 		auto strExprLast = strExpr.right(1);
 
-        stdExpr += stdNum;
+        stdExpr += stdNum;                                      //ë§ˆì§€ë§‰ì— ì…ë ¥ëœ í”¼ì—°ì‚°ìë¥¼ ìˆ˜ì‹ì— ì¶”ê°€ -> ìˆ˜ì‹ ì™„ì„±
         /*--------------------------------------------------------------------
-            ¼ö½ÄÀÌ ¿Ï¼ºµÇÁö ¾ÊÀº »óÅÂÀÏ ¶§(¼ö½Ä ³¡ÀÌ ¿¬»êÀÚÀÌ°í ¼ıÀÚ ÀÔ·ÂÃ¢ÀÌ ºñ¿öÁø »óÅÂ, ÀÌÀü µ¿ÀÛÀÌ ¿¬»êÀÚ¸¦ ÀÔ·ÂÇÑ °æ¿ì)
-            ¿¹¿Ü Ã³¸®
+            ìˆ˜ì‹ì´ ì™„ì„±ë˜ì§€ ì•Šì€ ìƒíƒœì¼ ë•Œ(ìˆ˜ì‹ ëì´ ì—°ì‚°ìì´ê³  ìˆ«ì ì…ë ¥ì°½ì´ ë¹„ì›Œì§„ ìƒíƒœ, ì´ì „ ë™ì‘ì´ ì—°ì‚°ìë¥¼ ì…ë ¥í•œ ê²½ìš°)
+            ì˜ˆì™¸ ì²˜ë¦¬
         --------------------------------------------------------------------*/
         if (stdNum.empty())
         {
@@ -219,10 +238,10 @@ void CGH_QtWidget_Calculator::on_Button_result()                //¼ö½Ä °á°ú°ª ¿¬
             return;
         }
         /*--------------------------------------------------------------------
-            ¼ö½Ä¿¡ 0 ³ª´°¼ÀÀÌ ÀÔ·ÂµÈ °æ¿ì
-            ¿¹¿Ü Ã³¸®(¼ö½Ä ÃÊ±âÈ­)
+            ìˆ˜ì‹ì— 0 ë‚˜ëˆ—ì…ˆì´ ì…ë ¥ëœ ê²½ìš°
+            ì˜ˆì™¸ ì²˜ë¦¬(ìˆ˜ì‹ ì´ˆê¸°í™”)
         --------------------------------------------------------------------*/
-        else if (strExprLast == "/" && (strNum == "0" || strNum == "00"))
+        else if (strExprLast == "/" && (strNum == "0" || strNum == "00"))       //ë‚˜ëˆ—ì…ˆì´ ìˆ˜ì‹ ëì— ìˆê³ , ìƒˆë¡œ ì…ë ¥ëœ í”¼ì—°ì‚°ìê°€ "0" ì¼ ë•Œ
         {
 			QMessageBox::warning(this, "Error Expression!", "Divide '0' inserted! Write Expression Correctly");
 			ui.lineEdit_num->setText("");
@@ -230,26 +249,26 @@ void CGH_QtWidget_Calculator::on_Button_result()                //¼ö½Ä °á°ú°ª ¿¬
             return;
         }
 
-        auto nResult = calculator::eval(stdExpr);
-        auto strExpr = QString::fromStdString(stdExpr);
+        auto nResult = calculator::eval(stdExpr);               //ê³„ì‚°ê¸° ì˜¤í”ˆì†ŒìŠ¤ í™œìš©. String íƒ€ì… ì…ë ¥, int íƒ€ì… ì¶œë ¥
+        auto strExpr = QString::fromStdString(stdExpr);         
 
-        strExpr += " =";
+        strExpr += " =";                                        //ìˆ˜ì‹ ëì— "=" ê¸°í˜¸ ì¶”ê°€
 
-        ui.lineEdit_num->setText(QString::number(nResult));
-        ui.lineEdit_expr->setText(strExpr);
+        ui.lineEdit_num->setText(QString::number(nResult));     //ìˆ˜ì‹ ê²°ê³¼ê°’ì€ í”¼ì—°ì‚°ì ì…ë ¥ì°½ì— í‘œí˜„
+        ui.lineEdit_expr->setText(strExpr);                     //ìˆ˜ì‹ ì¶œë ¥
     }
     /*--------------------------------------------------------------------
-		¼ö½ÄÀÌ ÀüÇô ÀÔ·ÂµÇÁö ¾ÊÀº °æ¿ì
-		¿¹¿Ü Ã³¸®
+		ìˆ˜ì‹ì´ ì „í˜€ ì…ë ¥ë˜ì§€ ì•Šì€ ê²½ìš°
+		ì˜ˆì™¸ ì²˜ë¦¬
 	--------------------------------------------------------------------*/
     else
-    {                                                           //°è»ê ¿Ï·á ÈÄ
+    {                                                           //ê³„ì‚° ì™„ë£Œ í›„
         QMessageBox::warning(this, "Error Expression!", "There is no exist data of expression. Input the Expression!");
     }
     
 }
 
-//¼ıÀÚ¹öÆ° ½½·Ô
+//ìˆ«ìë²„íŠ¼ ìŠ¬ë¡¯
 void CGH_QtWidget_Calculator::on_Button_0()     
 {
     setCalcData("0");
@@ -305,7 +324,7 @@ void CGH_QtWidget_Calculator::on_Button_00()
 	setCalcData("00");
 }
 
-//¿¬»êÀÚ ¹öÆ° ½½·Ô
+//ì—°ì‚°ì ë²„íŠ¼ ìŠ¬ë¡¯
 void CGH_QtWidget_Calculator::on_Button_plus()
 {
     setCalcData("+");

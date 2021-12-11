@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_CGH_QtWidget_Calculator.h"
@@ -14,11 +14,13 @@ private:
     Ui::CGH_QtWidget_CalculatorClass ui;
 
 public:
-    //»ç¿ëÀÚ ÁöÁ¤ ÇÔ¼ö
-    void setCalcData(QString strNum);                   //lineEdit_num À§Á¬¿¡ ¼ıÀÚ¿­ Ãâ·Â
-    void closeEvent(QCloseEvent* event);                //alt+f4 Á¾·á ±â´É ºñÈ°¼ºÈ­
+    //ì‚¬ìš©ì ì§€ì • í•¨ìˆ˜
+    void setCalcData(QString strNum);                   //lineEdit_num ìœ„ì ¯ì— ìˆ«ìì—´ ì¶œë ¥
 
-    // ¹öÆ° UI ½½·Ô : ¹öÆ°ÀÇ ¹®ÀÚ¸¦ lineEdit À§Á¬À¸·Î Àü´Ş
+    //ìœˆë„ìš° í•¨ìˆ˜
+    void closeEvent(QCloseEvent* event);                //alt+f4 ì¢…ë£Œ ê¸°ëŠ¥ ë¹„í™œì„±í™”
+
+    // ë²„íŠ¼ UI ìŠ¬ë¡¯ : ë²„íŠ¼ì˜ ë¬¸ìë¥¼ lineEdit ìœ„ì ¯ìœ¼ë¡œ ì „ë‹¬
     void on_Button_0();
     void on_Button_1();
     void on_Button_2();

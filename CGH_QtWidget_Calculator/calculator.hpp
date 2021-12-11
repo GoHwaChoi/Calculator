@@ -1,4 +1,4 @@
-///
+﻿///
 /// @file      calculator.hpp
 /// @brief     calculator::eval(const std::string&) evaluates an integer
 ///            arithmetic expression and returns the result. If an error

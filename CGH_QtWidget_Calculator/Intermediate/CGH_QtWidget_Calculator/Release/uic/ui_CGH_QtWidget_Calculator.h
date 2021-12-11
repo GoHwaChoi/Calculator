@@ -63,6 +63,7 @@ public:
         if (CGH_QtWidget_CalculatorClass->objectName().isEmpty())
             CGH_QtWidget_CalculatorClass->setObjectName(QStringLiteral("CGH_QtWidget_CalculatorClass"));
         CGH_QtWidget_CalculatorClass->resize(794, 761);
+        CGH_QtWidget_CalculatorClass->setMinimumSize(QSize(500, 450));
         CGH_QtWidget_CalculatorClass->setStyleSheet(QLatin1String("background-color: rgb(25, 35, 45);\n"
 "color: rgb(240, 240, 240);"));
         centralWidget = new QWidget(CGH_QtWidget_CalculatorClass);
@@ -404,7 +405,7 @@ public:
 
     void retranslateUi(QMainWindow *CGH_QtWidget_CalculatorClass)
     {
-        CGH_QtWidget_CalculatorClass->setWindowTitle(QApplication::translate("CGH_QtWidget_CalculatorClass", "CGH_QtWidget_Calculator", nullptr));
+        CGH_QtWidget_CalculatorClass->setWindowTitle(QApplication::translate("CGH_QtWidget_CalculatorClass", "\354\202\254\354\271\231\354\227\260\354\202\260 \352\263\204\354\202\260\352\270\260 - \354\240\225\354\210\230", nullptr));
         pushButton_7->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "7", nullptr));
         pushButton_8->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "8", nullptr));
         pushButton_9->setText(QApplication::translate("CGH_QtWidget_CalculatorClass", "9", nullptr));
